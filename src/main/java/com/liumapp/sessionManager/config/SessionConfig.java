@@ -1,4 +1,4 @@
-package com.liumapp.config;
+package com.liumapp.sessionManager.config;
 
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
