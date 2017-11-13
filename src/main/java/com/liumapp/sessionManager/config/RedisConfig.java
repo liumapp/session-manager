@@ -18,35 +18,38 @@ public class RedisConfig {
 
     @Bean
     public JedisConnectionFactory connectionFactory () {
-        return new JedisConnectionFactory();
+        JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory();
+        jedisConnectionFactory.setHostName("localhost");
+        jedisConnectionFactory.setPort(6379);
+        jedisConnectionFactory.setPassword("adminadmin");
+        return jedisConnectionFactory;
     }
 
     @Bean
-    RedisTemplate<String, Integer> intRedisTemplate(JedisConnectionFactory connectionFactory) {
-        RedisTemplate<String, Integer> redisTemplate = new RedisTemplate<String, Integer>();
-        redisTemplate.setConnectionFactory(connectionFactory);
-        return redisTemplate;
-    }
-
-    @Bean
-    ValueOperations<String, Integer> intOperations(RedisTemplate<String, Integer> redisTemplate) {
-        return redisTemplate.opsForValue();
-    }
-
-    @Bean
-    RedisTemplate<String, Object> objRedisTemplate(JedisConnectionFactory connectionFactory) {
+    RedisTemplate<String, Object> intRedisTemplate(JedisConnectionFactory connectionFactory) {
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<String, Object>();
         redisTemplate.setConnectionFactory(connectionFactory);
-        StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
-        redisTemplate.setKeySerializer(stringRedisSerializer);
-        redisTemplate.setHashKeySerializer(stringRedisSerializer);
         return redisTemplate;
     }
 
-    @Bean
-    ValueOperations<String, Object> objOperations(RedisTemplate<String, Object> redisTemplate) {
-        return redisTemplate.opsForValue();
-    }
-
+//    @Bean
+//    ValueOperations<String, Integer> intOperations(RedisTemplate<String, Integer> redisTemplate) {
+//        return redisTemplate.opsForValue();
+//    }
+//
+//    @Bean
+//    RedisTemplate<String, Object> objRedisTemplate(JedisConnectionFactory connectionFactory) {
+//        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<String, Object>();
+//        redisTemplate.setConnectionFactory(connectionFactory);
+//        StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
+//        redisTemplate.setKeySerializer(stringRedisSerializer);
+//        redisTemplate.setHashKeySerializer(stringRedisSerializer);
+//        return redisTemplate;
+//    }
+//
+//    @Bean
+//    ValueOperations<String, Object> objOperations(RedisTemplate<String, Object> redisTemplate) {
+//        return redisTemplate.opsForValue();
+//    }
 
 }
